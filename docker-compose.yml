@@ -5,7 +5,7 @@ services:
     image: postgres:latest
     container_name: postgres_container
     env_file:
-      - .env
+      - ./env/.env
     ports:
       - "5432:5432"
     volumes:
