@@ -26,28 +26,28 @@ Welcome to **Ask My DB**, an innovative project designed to interact with a Post
 ### Installation
 
 1. **Clone the Repository**:
-    \`\`\`bash
+    ```bash
     git clone https://github.com/yourusername/ask-my-db.git
     cd ask-my-db
-    \`\`\`
+    ```
 
 2. **Setup Environment**:
-    \`\`\`bash
+    ```bash
     cp .conf/.env.template .conf/.env
-    \`\`\`
+    ```
 
     Edit the `.conf/.env` file to include your database and OpenAI credentials.
 
 3. **Install Dependencies**:
-    \`\`\`bash
+    ```bash
     pip install -r requirements.txt
-    \`\`\`
+    ```
 
 4. **Run PostgreSQL**:
     You can either run PostgreSQL locally or use Docker:
-    \`\`\`bash
+    ```bash
     docker-compose up -d
-    \`\`\`
+    ```
 
 ### Usage
 
@@ -55,9 +55,9 @@ Welcome to **Ask My DB**, an innovative project designed to interact with a Post
     Ensure your database is set up and has the required tables. You can use the provided migration scripts or setup manually.
 
 2. **Run the Application**:
-    \`\`\`bash
+    ```bash
     python src/main.py
-    \`\`\`
+    ```
 
 3. **Interact with the System**:
     Enter your natural language query when prompted. The system will generate a SQL query, execute it, and save the results to a uniquely named CSV file.
@@ -65,22 +65,22 @@ Welcome to **Ask My DB**, an innovative project designed to interact with a Post
 
 ### Example
 
-\`\`\`python
+```python
 from src.queries_core import QueriesCore
 
 queries_core = QueriesCore()
 prompt = "Get all users with their names and companies they work for."
 result = queries_core.answer_user_prompt(prompt)
 print(result)
-\`\`\`
+```
 
 ## Testing
 
 To run the tests, ensure you have \`pytest\` installed and run the following command:
 
-\`\`\`bash
+```bash
 pytest
-\`\`\`
+```
 
 The tests will verify the functionality of the database interactions, GPT prompt handling, and the CSV file generation.
 
