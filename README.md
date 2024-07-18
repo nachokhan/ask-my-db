@@ -25,7 +25,6 @@ project_directory/
 │   ├── gpt_asker.py
 │   ├── querier_db.py
 │   ├── queries_core.py
-│   └── models.py
 ├── tests/
 │   ├── __init__.py
 │   ├── conftest.py
