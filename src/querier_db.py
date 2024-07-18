@@ -14,7 +14,7 @@ class QuerierDB:
         host = os.getenv('POSTGRES_HOST', 'localhost')
         port = os.getenv('POSTGRES_PORT', '5432')
 
-        self.connection = psycopg2.connect(
+        self._connection = psycopg2.connect(
             dbname=dbname,
             user=user,
             password=password,
@@ -28,17 +28,17 @@ class QuerierDB:
         FROM information_schema.columns 
         WHERE table_schema = 'public';
         """
-        with self.connection.cursor() as cursor:
+        with self._connection.cursor() as cursor:
             cursor.execute(query)
             schema = cursor.fetchall()
         return schema
 
     def execute_query(self, query):
-        with self.connection.cursor() as cursor:
+        with self._connection.cursor() as cursor:
             cursor.execute(query)
             if cursor.description:  # Check if the query returns data
                 result = cursor.fetchall()
                 column_names = [desc[0] for desc in cursor.description]
                 return [dict(zip(column_names, row)) for row in result]
-            self.connection.commit()
+            self._connection.commit()
             return None
