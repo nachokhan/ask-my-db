@@ -14,31 +14,6 @@ Welcome to **Ask My DB**, an innovative project designed to interact with a Post
 - **CSV Export**: Converts query results into CSV files with unique timestamps to avoid overwriting.
 - **Modular Design**: Clean separation of concerns with dedicated classes for database interaction, GPT query generation, and core logic handling.
 
-## Project Structure
-
-\`\`\`plaintext
-project_directory/
-├── .conf/
-│   └── .env.template
-├── src/
-│   ├── __init__.py
-│   ├── gpt_asker.py
-│   ├── querier_db.py
-│   ├── queries_core.py
-│   └── models.py
-├── tests/
-│   ├── __init__.py
-│   ├── conftest.py
-│   ├── test_gpt_asker.py
-│   ├── test_querier_db.py
-│   └── test_queries_core.py
-├── .gitignore
-├── docker-compose.yml
-├── requirements.txt
-├── setup.py
-└── README.md
-\`\`\`
-
 ## Getting Started
 
 ### Prerequisites
