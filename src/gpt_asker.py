@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '../.conf/.env'))
 
 
-class GPTConnector:
+class GPTAsker:
     def __init__(self):
         self.api_key = os.getenv('OPENAI_API_KEY')
         self._client = OpenAI()
@@ -19,7 +19,8 @@ class GPTConnector:
             ]
             response = self._client.chat.completions.create(
                 model="gpt-4o",
-                messages=messages
+                messages=messages,
+                temperature=0.1,
             )
             return response.choices[0].message.content
         except Exception as e:

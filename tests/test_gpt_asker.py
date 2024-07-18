@@ -1,10 +1,10 @@
 import pytest
-from src.gpt_connector import GPTConnector
+from gpt_asker import GPTAsker
 
 
 @pytest.fixture(scope='module')
 def gpt_connector():
-    return GPTConnector()
+    return GPTAsker()
 
 
 def test_send_prompt(gpt_connector):
