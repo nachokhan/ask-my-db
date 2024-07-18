@@ -1,3 +1,6 @@
+#CSV files
+*.csv
+
 # Database data
 .database/data
 
