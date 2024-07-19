@@ -1,5 +1,5 @@
 import pytest
-from db_factory import DBFactory
+from queriers_db.db_factory import DBFactory
 
 
 @pytest.fixture(scope='module')

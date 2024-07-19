@@ -1,4 +1,4 @@
-from db_factory import DBFactory
+from queriers_db.db_factory import DBFactory
 from gpt_asker import GPTAsker
 import csv
 import io
