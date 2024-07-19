@@ -2,7 +2,8 @@
 *.csv
 
 # Database data
-.database/data
+.database/pg/data
+.database/mysql/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

@@ -1,4 +1,4 @@
-from querier_db import QuerierDB
+from db_factory import DBFactory
 from gpt_asker import GPTAsker
 import csv
 import io
@@ -7,7 +7,7 @@ from datetime import datetime
 
 class QueriesCore:
     def __init__(self):
-        self._querier_db = QuerierDB()
+        self._querier_db = DBFactory.get_db()
         self._db_schema = self._get_db_schema()
         self._gpt_asker = GPTAsker()
 
@@ -26,11 +26,9 @@ class QueriesCore:
         # Convert the result to CSV
         csv_text = self._convert_to_csv(result)
 
-        # Generate filename with timestamp
-        filename = self._generate_filename("query_result", "csv")
-
-        # Write CSV text to file
-        self._write_csv_to_file(csv_text, filename)
+        # Write CSV text to file        
+        # filename = self._generate_filename("query_result", "csv")
+        # self._write_csv_to_file(csv_text, filename)
 
         return csv_text
 

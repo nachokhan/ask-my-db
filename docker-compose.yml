@@ -1,16 +1,39 @@
 version: '3.8'
 
 services:
-  db:
+  posgres:
     image: postgres:latest
     container_name: postgres_container
     env_file:
-      - ./env/.env
+      - ./.conf/.env
+    # environment:
+    #   POSTGRES_DB: ${POSTGRES_DB}
+    #   POSTGRES_USER: ${POSTGRES_USER}
+    #   POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
       - "5432:5432"
     volumes:
-      - ./.database/data:/var/lib/postgresql/data
-      - ./.database/initdb:/docker-entrypoint-initdb.d
+      - ./.database/pg/data:/var/lib/postgresql/data
+      - ./.database/pg/initdb:/docker-entrypoint-initdb.d
+
+  mysql:
+    image: mysql:latest
+    container_name: mysql_container
+    env_file:
+      - ./.conf/.env
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DB}
+    # environment:
+    #   MYSQL_DATABASE: ${MYSQL_DB}
+    #   MYSQL_USER: ${MYSQL_USER}
+    #   MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    #   MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./.database/mysql/data:/var/lib/mysql
+      - ./.database/mysql/mysql-init:/docker-entrypoint-initdb.d
+    
 
 volumes:
   db_data:

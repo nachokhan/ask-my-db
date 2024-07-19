@@ -1,10 +1,10 @@
 import pytest
-from querier_db import QuerierDB
+from db_factory import DBFactory
 
 
 @pytest.fixture(scope='module')
 def querier_db():
-    db = QuerierDB()
+    db = DBFactory.get_db()
     yield db
     # Clean up after tests
     db.execute_query('DROP TABLE IF EXISTS test_table;')
@@ -15,7 +15,7 @@ def setup_database(querier_db):
     # Create a generic test table
     querier_db.execute_query('''
     CREATE TABLE IF NOT EXISTS test_table (
-        id SERIAL PRIMARY KEY,
+        id INT PRIMARY KEY AUTO_INCREMENT,
         data VARCHAR(100)
     );
     ''')
