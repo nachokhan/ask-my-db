@@ -5,6 +5,9 @@
 
 NO MORE SQL FOR YOU!
 
+![Texto alternativo](img/example1.png)
+
+
 Welcome to **Ask My DB**, an innovative project designed to interact with a PostgreSQL database using natural language prompts. This project leverages the power of OpenAI's GPT-4 to generate SQL queries based on user input and seamlessly executes these queries on your database. The results are then formatted into a CSV file for easy consumption.
 
 ## Features
