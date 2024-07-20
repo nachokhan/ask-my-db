@@ -4,6 +4,7 @@ from queries_core import QueriesCore
 from visual.ascii_table import csv_string_to_ascii_table
 from visual.ansi_colors import ANSI_COLORS
 
+
 def clear_screen():
     # Detecta el sistema operativo y usa el comando adecuado
     if os.name == 'nt':  # Para Windows
