@@ -6,10 +6,9 @@ from visual.ansi_colors import ANSI_COLORS
 
 
 def clear_screen():
-    # Detecta el sistema operativo y usa el comando adecuado
-    if os.name == 'nt':  # Para Windows
+    if os.name == 'nt':
         os.system('cls')
-    else:  # Para Unix/Linux/Mac
+    else:
         os.system('clear')
 
 
