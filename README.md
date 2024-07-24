@@ -5,15 +5,14 @@
 
 NO MORE SQL FOR YOU!
 
-![Texto alternativo](img/example1.png)
+![Example Image](img/example1.png)
 
-
-Welcome to **Ask My DB**, an innovative project designed to interact with a PostgreSQL database using natural language prompts. This project leverages the power of OpenAI's GPT-4 to generate SQL queries based on user input and seamlessly executes these queries on your database. The results are then formatted into a CSV file for easy consumption.
+Welcome to **Ask My DB**, an innovative project designed to interact with PostgreSQL and MySQL databases using natural language prompts. This project leverages the power of OpenAI's GPT-4 to generate SQL queries based on user input and seamlessly executes these queries on your database. The results are then formatted into a CSV file for easy consumption.
 
 ## Features
 
 - **Natural Language Processing**: Generate SQL queries using GPT-4 based on user prompts.
-- **Database Integration**: Connects to a PostgreSQL database, retrieves schema information, and executes queries.
+- **Database Integration**: Connects to PostgreSQL and MySQL databases, retrieves schema information, and executes queries.
 - **CSV Export**: Converts query results into CSV files with unique timestamps to avoid overwriting.
 - **Modular Design**: Clean separation of concerns with dedicated classes for database interaction, GPT query generation, and core logic handling.
 
@@ -28,6 +27,15 @@ project_directory/
 │   ├── gpt_asker.py
 │   ├── querier_db.py
 │   ├── queries_core.py
+│   ├── main.py
+│   ├── visual/
+│   │   ├── ansi_colors.py
+│   │   └── ascii_table.py
+│   └── queriers_db/
+│       ├── db_factory.py
+│       ├── querier_db.py
+│       ├── querier_db_mysql.py
+│       └── querier_db_postgres.py
 ├── tests/
 │   ├── __init__.py
 │   ├── conftest.py
@@ -46,8 +54,8 @@ project_directory/
 ### Prerequisites
 
 - Python 3.8 or higher
-- PostgreSQL database
-- Docker (optional for running PostgreSQL locally)
+- PostgreSQL or MySQL database
+- Docker (optional for running databases locally)
 - OpenAI API key
 
 ### Installation
@@ -70,8 +78,8 @@ project_directory/
     pip install -r requirements.txt
     ```
 
-4. **Run PostgreSQL**:
-    You can either run PostgreSQL locally or use Docker:
+4. **Run the Database**:
+    You can either run PostgreSQL or MySQL locally or use Docker:
     ```bash
     docker-compose up -d
     ```
@@ -79,7 +87,7 @@ project_directory/
 ### Usage
 
 1. **Initialize the Database**:
-    Ensure your database is set up and has the required tables. You can use the provided migration scripts or setup manually.
+    Ensure your database is set up and has the required tables. You can use the provided migration scripts or set it up manually.
 
 2. **Run the Application**:
     ```bash
@@ -88,22 +96,57 @@ project_directory/
 
 3. **Interact with the System**:
     Enter your natural language query when prompted. The system will generate a SQL query, execute it, and save the results to a uniquely named CSV file.
-    NOTE: the prompt is being harcoded in main.py you must modify it here :)
+    NOTE: the prompt is being hardcoded in main.py you must modify it here :)
 
 ### Example
 
-```python
-from src.queries_core import QueriesCore
+1. **Create a Prompt**:
+    Prompts are read from a JSON file located at `examples/prompts.json` or can be entered manually. The JSON file can contain one or more prompts. If there are no prompts in the file, you will be prompted to enter one manually. Here's an example of multiple prompts in the JSON file:
+    ```json
+    {
+        "prompts": [
+            "Get all users with their names and companies they work for.",
+            "Get all products with their prices and stock quantities."
+        ]
+    }
+    ```
 
-queries_core = QueriesCore()
-prompt = "Get all users with their names and companies they work for."
-result = queries_core.answer_user_prompt(prompt)
-print(result)
-```
+    If you are entering the prompt manually, you only need to write the prompt directly when prompted by the application, without using JSON format. For example:
+
+    ```plaintext
+    Qrite your prompt here:
+
+    Get all users with their names and companies they work for.
+    ```
+
+2. **Run the Main Script**:
+    When you run the `main.py` script, it will process the prompts, generate SQL queries using GPT-4, execute them, and display the results in an ASCII table format. Additionally, the results will be saved to a CSV file.
+
+    ```bash
+    python src/main.py
+    ```
+
+3. **Review the Output**:
+    The output will be printed on the console as an ASCII table. The generated CSV files will be saved in the specified directory.
+
+    ```plaintext
+    PROMPT: Get all users with their names and companies they work for.
+    Processing...
+
+    +---------+-------------+
+    |   name  |   company   |
+    +---------+-------------+
+    |  John   |  Company A  |
+    |  Jane   |  Company B  |
+    +---------+-------------+
+    ```
+
+This example demonstrates how to use the system to generate and execute SQL queries based on natural language prompts and how to interpret the results.
+
 
 ## Testing
 
-To run the tests, ensure you have \`pytest\` installed and run the following command:
+To run the tests, ensure you have `pytest` installed and run the following command:
 
 ```bash
 pytest
