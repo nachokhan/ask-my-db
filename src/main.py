@@ -23,6 +23,10 @@ if __name__ == "__main__":
     queries_core = QueriesCore()
     answers = []
 
+    if prompts == []:
+        prompts.append(input("Escribi tu consulta aca:\n\n"))
+        clear_screen()
+
     for prompt in prompts:
         print(f"\n{ANSI_COLORS["bg_bright_black"]}#########################################################################################\n{ANSI_COLORS["reset"]}")
         print(f"{ANSI_COLORS["yellow"]}PROMPT{ANSI_COLORS["reset"]}: {ANSI_COLORS["cyan"]}{prompt}{ANSI_COLORS["reset"]}")
