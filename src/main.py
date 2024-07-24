@@ -24,7 +24,7 @@ if __name__ == "__main__":
     answers = []
 
     if prompts == []:
-        prompts.append(input("Escribi tu consulta aca:\n\n"))
+        prompts.append(input("Write your prompt here:\n\n"))
         clear_screen()
 
     for prompt in prompts:
