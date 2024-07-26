@@ -35,11 +35,10 @@ if __name__ == "__main__":
     for prompt in prompts:
 
         result = {}
-
-        print(f"\n{COLOR["bg_bright_black"]}#########################################################################################\n{COLOR["reset"]}")
-        print(f"{COLOR["yellow"]}PROMPT{COLOR["reset"]}: {COLOR["cyan"]}{prompt}{COLOR["reset"]}")
-        print("Processing...")
-        try: 
+        try:
+            print(f"\n{COLOR["bg_bright_black"]}#########################################################################################\n{COLOR["reset"]}")
+            print(f"{COLOR["yellow"]}PROMPT{COLOR["reset"]}: {COLOR["cyan"]}{prompt}{COLOR["reset"]}")
+            print("Processing...")
             csv, query = queries_core.answer_user_prompt(prompt)
             result = {
                 "prompt": prompt,
