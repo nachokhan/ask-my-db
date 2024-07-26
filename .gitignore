@@ -3,6 +3,7 @@
 
 # JSON of answers
 *answers*.json
+structure*.json
 
 # Database data
 .database/pg/data
