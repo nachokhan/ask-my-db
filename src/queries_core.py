@@ -7,14 +7,16 @@ from datetime import datetime
 
 class QueriesCore:
     def __init__(self):
+        self._generated_csv_text = None
+        self._generated_query = None
+        self._user_prompt = None
         self._querier_db = DBFactory.get_db()
         self._db_schema = self._get_db_schema()
         self._gpt_asker = GPTAsker()
 
-    def _get_db_schema(self):
-        return self._querier_db.get_db_schema()
-
     def answer_user_prompt(self, user_prompt):
+        self._user_prompt = user_prompt
+
         # Send user prompt and DB schema to GPTAsker
         schema_description = self._format_schema(self._db_schema)
         gpt_prompt = f"Based on the following database schema: {schema_description}, generate a SQL query for: {user_prompt}"
@@ -26,11 +28,21 @@ class QueriesCore:
         # Convert the result to CSV
         csv_text = self._convert_to_csv(result)
 
-        # Write CSV text to file        
-        # filename = self._generate_filename("query_result", "csv")
-        # self._write_csv_to_file(csv_text, filename)
+        self._generated_csv_text = csv_text
+        self._generated_query = sql_query
 
-        return csv_text
+        return self._generated_csv_text, self._generated_query
+
+    def write_csv_to_file(self, filename, csv_text = None):
+        # Helper method to write CSV text to a file
+        if not csv_text:
+            csv_text = self._generated_csv_text
+
+        with open(filename, 'w', newline='') as file:
+            file.write(csv_text)
+
+    def _get_db_schema(self):
+        return self._querier_db.get_db_schema()
 
     def _format_schema(self, schema):
         # Helper method to format the DB schema for GPT prompt
@@ -55,8 +67,3 @@ class QueriesCore:
         # Helper method to generate filename with timestamp
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         return f"{base_name}_{timestamp}.{extension}"
-
-    def _write_csv_to_file(self, csv_text, filename):
-        # Helper method to write CSV text to a file
-        with open(filename, 'w', newline='') as file:
-            file.write(csv_text)

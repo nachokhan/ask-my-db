@@ -2,7 +2,7 @@ import pandas as pd
 from tabulate import tabulate
 from io import StringIO
 
-from visual.ansi_colors import ANSI_COLORS
+from visual.ansi_colors import COLOR
 
 
 def csv_string_to_ascii_table(csv_string, header_color="reset", number_color="reset", string_color="reset"):
@@ -11,14 +11,14 @@ def csv_string_to_ascii_table(csv_string, header_color="reset", number_color="re
     df = pd.read_csv(csv_data)
 
     # Apply colors to the headers
-    colored_headers = [f'{ANSI_COLORS[header_color]}{header}{ANSI_COLORS["reset"]}' for header in df.columns]
+    colored_headers = [f'{COLOR[header_color]}{header}{COLOR["reset"]}' for header in df.columns]
 
     # Function to color the cells
     def color_cell(cell):
         if isinstance(cell, (int, float)):
-            return f'{ANSI_COLORS[number_color]}{cell}{ANSI_COLORS["reset"]}'  # Color for numbers
+            return f'{COLOR[number_color]}{cell}{COLOR["reset"]}'  # Color for numbers
         else:
-            return f'{ANSI_COLORS[string_color]}{cell}{ANSI_COLORS["reset"]}'  # Color for text
+            return f'{COLOR[string_color]}{cell}{COLOR["reset"]}'  # Color for text
 
     # Apply colors to all cells in the DataFrame
     df = df.map(color_cell)
