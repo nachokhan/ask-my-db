@@ -1,6 +1,9 @@
 #CSV files
 *.csv
 
+# JSON of answers
+*answers*.json
+
 # Database data
 .database/pg/data
 .database/mysql/
