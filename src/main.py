@@ -1,5 +1,6 @@
 import json
 import os
+from gpt_marketing import GPTMarketing
 from queries_core import QueriesCore
 from visual.ascii_table import csv_string_to_ascii_table
 from visual.ansi_colors import COLOR
@@ -24,6 +25,7 @@ if __name__ == "__main__":
     try:
         queries_core = QueriesCore()
         sql_formatter = SQLFormatter()
+        gpt_marketing = GPTMarketing()
     except Exception as e:
         print(f"{COLOR["red"]}ERROR{COLOR["reset"]}: {COLOR["yellow"]}{e}{COLOR["reset"]}\n")
         exit()
@@ -52,6 +54,9 @@ if __name__ == "__main__":
             print(f"\n{table}")
             print(f"\n{COLOR["yellow"]}GENERATED SQL QUERY{COLOR["reset"]}:")
             sql_formatter.format_sql(query)
+
+            conclusions = gpt_marketing.analyze_csv_text(csv, 'marketing')
+            print(f"\n{COLOR['yellow']}MARKETING INSIGHTS{COLOR['reset']}:\n{conclusions}")
 
         except Exception as e:
             result = {
