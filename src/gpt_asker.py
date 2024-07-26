@@ -8,10 +8,22 @@ load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '../.conf/.env')
 
 class GPTAsker:
     def __init__(self):
+        """
+        Initializes the GPTAsker with the OpenAI API key.
+        """
         self.api_key = os.getenv('OPENAI_API_KEY')
         self._client = OpenAI()
 
     def send_prompt(self, user_prompt):
+        """
+        Sends a prompt to the GPT model and returns the response.
+
+        Args:
+            user_prompt (str): The user's prompt to send to GPT.
+
+        Returns:
+            str: The response from GPT.
+        """
         try:
             prompt = f'Respond without introductions or conclusions. Only provide the precise information I request without any kind of formatting, just raw text: {user_prompt}'
             messages = [

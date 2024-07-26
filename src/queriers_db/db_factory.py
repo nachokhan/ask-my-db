@@ -11,6 +11,15 @@ load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '../.conf/.env')
 class DBFactory:
     @staticmethod
     def get_db() -> QuerierDB:
+        """
+        Returns the appropriate QuerierDB instance based on the DB_TYPE environment variable.
+
+        Returns:
+            QuerierDB: An instance of a QuerierDB subclass.
+
+        Raises:
+            ValueError: If the DB_TYPE is unsupported.
+        """
         querier_db = None
         db_type = os.getenv('DB_TYPE')
         if db_type == 'postgres':
