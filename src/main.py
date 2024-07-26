@@ -3,6 +3,7 @@ import os
 from queries_core import QueriesCore
 from visual.ascii_table import csv_string_to_ascii_table
 from visual.ansi_colors import COLOR
+from visual.sql_formatter import SQLFormatter
 
 
 def clear_screen():
@@ -22,6 +23,7 @@ if __name__ == "__main__":
 
     try:
         queries_core = QueriesCore()
+        sql_formatter = SQLFormatter()
     except Exception as e:
         print(f"{COLOR["red"]}ERROR{COLOR["reset"]}: {COLOR["yellow"]}{e}{COLOR["reset"]}\n")
         exit()
@@ -48,6 +50,8 @@ if __name__ == "__main__":
             table = csv_string_to_ascii_table(csv, "blue", "green", "green")
             print("\033[F\033[K", end='')
             print(f"\n{table}")
+            print(f"\n{COLOR["yellow"]}GENERATED SQL QUERY{COLOR["reset"]}:")
+            sql_formatter.format_sql(query)
 
         except Exception as e:
             result = {
