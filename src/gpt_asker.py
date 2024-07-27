@@ -7,11 +7,12 @@ load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '../.conf/.env')
 
 
 class GPTAsker:
-    def __init__(self):
+    def __init__(self, temperature=0.1):
         """
         Initializes the GPTAsker with the OpenAI API key.
         """
-        self.api_key = os.getenv('OPENAI_API_KEY')
+        self._api_key = os.getenv('OPENAI_API_KEY')
+        self._temperature = temperature
         self._client = OpenAI()
 
     def send_prompt(self, user_prompt):
@@ -32,7 +33,7 @@ class GPTAsker:
             response = self._client.chat.completions.create(
                 model="gpt-4o",
                 messages=messages,
-                temperature=0.1,
+                temperature=self._temperature,
             )
             return response.choices[0].message.content
         except Exception as e:

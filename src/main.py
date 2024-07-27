@@ -4,6 +4,7 @@ from gpt_marketing import GPTMarketing
 from queries_core import QueriesCore
 from visual.ascii_table import csv_string_to_ascii_table
 from visual.ansi_colors import COLOR
+from visual.markdown_formatter import MarkdownFormatter
 from visual.sql_formatter import SQLFormatter
 
 
@@ -25,6 +26,7 @@ if __name__ == "__main__":
     try:
         queries_core = QueriesCore()
         sql_formatter = SQLFormatter()
+        mdown_formatter = MarkdownFormatter()
         gpt_marketing = GPTMarketing()
     except Exception as e:
         print(f"{COLOR["red"]}ERROR{COLOR["reset"]}: {COLOR["yellow"]}{e}{COLOR["reset"]}\n")
@@ -35,6 +37,8 @@ if __name__ == "__main__":
         clear_screen()
 
     answers = []
+
+    results_for_marketing = []
 
     for prompt in prompts:
 
@@ -55,8 +59,12 @@ if __name__ == "__main__":
             print(f"\n{COLOR["yellow"]}GENERATED SQL QUERY{COLOR["reset"]}:")
             sql_formatter.format_sql(query)
 
-            conclusions = gpt_marketing.analyze_csv_text(csv, 'marketing')
-            print(f"\n{COLOR['yellow']}MARKETING INSIGHTS{COLOR['reset']}:\n{conclusions}")
+            results_for_marketing.append(
+                {
+                    "prompt": prompt,
+                    "table": table,
+                }
+            )
 
         except Exception as e:
             result = {
@@ -66,6 +74,13 @@ if __name__ == "__main__":
             print(f"{COLOR["red"]}ERROR{COLOR["reset"]}: {COLOR["yellow"]}{e}{COLOR["reset"]}")
 
         answers.append(result)
+
+    conclusions = gpt_marketing.analyze_csv_text(results_for_marketing, "marketing")
+    print(f"\n{COLOR['yellow']}MARKETING INSIGHTS{COLOR['reset']}:\n\n")
+    mdown_formatter.format_markdown(conclusions)
+
+    with open('examples/insights.md', 'w') as file:
+        file.write(conclusions)
 
     with open('examples/answers.json', 'w') as file:
         json.dump(answers, file, indent=4)

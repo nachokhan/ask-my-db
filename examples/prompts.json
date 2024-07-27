@@ -1,7 +1,9 @@
 {
     "prompts": [
-        "Necesito que hagas una tabla de doble entrada, donde las columnas seran los dias de la semana (lunes, martes, etc) y las filas seran los años desde 2019 hasta 2023 y cada celda sera la suma de reservas hechas por cada dia. Y al final agrega una columna que se llame total que tenga la suma de todas las reservas de ese año.",
-        "Necesito una tabla que tenga los meses en las columnas (ene, feb, mar, etc) y los años en las filas que muestre por año la cantidad de reservas realizadas en cada mes de ese año",
-        "Necesito una tabla que tenga los meses en las columnas (ene, feb, mar, etc) y los años en las filas que muestre por año la cantidad de reservas realizadas en cada mes de ese año pero seguna la fecha en que se generaron esas reservas"
+        "Para el restaurante 'El Origen de i', necesito que hagas una tabla de doble entrada, donde las columnas seran los dias de la semana (lunes, martes, etc) y las filas seran los años desde 2019 hasta 2024 y cada celda sera la suma de reservas hechas por cada dia. Y al final agrega una columna que se llame total que tenga la suma de todas las reservas de ese año.",
+        "Para el restaurante 'El Origen de i', necesito una tabla que tenga los meses en las columnas (ene, feb, mar, etc) y los años en las filas que muestre por año la cantidad de reservas realizadas en cada mes de ese año",
+        "Para el restaurante 'El Origen de i', necesito una tabla que tenga los meses en las columnas (ene, feb, mar, etc) y los años en las filas que muestre por año la cantidad de reservas realizadas en cada mes de ese año pero seguna la fecha en que se generaron esas reservas",
+        "Para el restaurante 'El Origen de i', necesito una tabla liste las 20 personas (nombre y apellido en la misma columna, y sin email) que mas reservas hicieron durante los años 2021 a 2024, indicando cuantas reservas hicieron por cada mes (sin importar en que año) y cuantas en total. Si el cliente es nan, ignorarlo.",
+        "Para el restaurante 'El Origen de i', necesito saber en que dias y horarios (turnos) de la semana esta abierto"
     ]
 }
