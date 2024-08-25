@@ -15,7 +15,7 @@ class QuerierDBPostgres(QuerierDB):
         """
         super().__init__()
 
-    def _set_conecction(self):
+    def _set_connection(self):
         """
         Sets up the PostgreSQL connection.
         """

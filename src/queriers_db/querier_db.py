@@ -6,15 +6,15 @@ class QuerierDB:
         self._schema_query = None
         self._schama_query_params = None
 
-        self._set_conecction()
+        self._set_connection()
         self._set_schema_query()
 
-    def _set_conecction(self):
+    def _set_connection(self):
         """
         <<interface>>
         Sets up the database connection.
         """
-        raise Exception("_set_conecction() method not implemented!")
+        raise Exception("_set_connection() method not implemented!")
 
     def _set_schema_query(self):
         """
